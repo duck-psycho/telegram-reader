@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Telegram Reader</string>
+    <string name="common_back">Назад</string>
+    <string name="common_close">Закрыть</string>
+    <string name="common_cancel">Отмена</string>
+    <string name="common_copied">Скопировано</string>
+    <string name="common_network_error">Ошибка сети</string>
+    <string name="common_search">Поиск</string>
+    <string name="common_version">Версия %1$s</string>
+    <string name="update_available">Доступна новая версия: %1$s</string>
+
+    <string name="nav_login">Войти</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="nav_add_channel">Добавить канал</string>
+
+    <string name="welcome_sidebar_guest">Нажмите +, чтобы добавить публичный Telegram-канал и начать чтение.</string>
+    <string name="welcome_support_prefix">Если хотите</string>
+    <string name="welcome_support_project">поддержать проект</string>
+    <string name="welcome_support_middle">, способы сделать это есть в</string>
+    <string name="welcome_support_settings">настройках</string>
+    <string name="welcome_support_suffix">.</string>
+
+    <string name="empty_intro">Веб-читалка публичных Telegram-каналов в привычном интерфейсе. Подписывайтесь на каналы, читайте ленту без приложения Telegram и синхронизируйте подписки между устройствами через ID аккаунта.</string>
+    <string name="empty_intro_how_to">Чтобы начать, добавьте канал кнопкой «+» или войдите в существующий аккаунт в шапке.</string>
+
+    <string name="settings_title">Настройки</string>
+    <string name="settings_account">Аккаунт</string>
+    <string name="settings_subscriptions">Подписки</string>
+    <string name="settings_created">Создан</string>
+    <string name="settings_account_empty">Аккаунт будет создан после первой подписки на канал.</string>
+    <string name="settings_show_id">Показать ID</string>
+    <string name="settings_hide_id">Скрыть ID</string>
+    <string name="settings_id_info_label">Что такое ID аккаунта</string>
+    <string name="settings_id_info">ID аккаунта синхронизирует подписки между устройствами. Сохраните его, чтобы войти на другом устройстве или восстановить доступ. Храните в тайне — у кого есть ID, тот может получить доступ к вашим подпискам.</string>
+    <string name="settings_copy_id">Скопировать ID</string>
+    <string name="settings_id_copied">ID скопирован</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_locale_ru">Русский</string>
+    <string name="settings_locale_en">English</string>
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_system">Системная</string>
+    <string name="settings_theme_dark">Тёмная</string>
+    <string name="settings_theme_light">Светлая</string>
+    <string name="settings_developer">Разработчик</string>
+    <string name="settings_site">Сайт</string>
+    <string name="settings_support">Поддержать разработчика</string>
+    <string name="settings_support_intro">Если приложение оказалось полезным, вы можете поддержать разработчика подпиской или донатом на Boosty, либо переводом на криптокошелёк:</string>
+    <string name="settings_boosty_donate">Boosty (донат)</string>
+    <string name="settings_copy">Скопировать</string>
+    <string name="settings_logout">Выйти из аккаунта</string>
+    <string name="settings_logging_out">Выход…</string>
+    <string name="settings_cache">Кэш медиа</string>
+    <string name="settings_cache_usage">%1$d файлов · %2$s / %3$s</string>
+    <string name="settings_cache_clear">Очистить кэш</string>
+    <string name="settings_cache_clearing">Очистка…</string>
+
+    <string name="login_title">Вход</string>
+    <string name="login_account">Аккаунт</string>
+    <string name="login_hint">Введите ID аккаунта, чтобы восстановить подписки на этом устройстве.</string>
+    <string name="login_placeholder">ID аккаунта</string>
+    <string name="login_submit">Войти</string>
+    <string name="login_submitting">Вход…</string>
+    <string name="login_enter_id">Введите ID аккаунта</string>
+    <string name="login_failed">Не удалось войти</string>
+
+    <string name="channel_add_title">Добавить канал</string>
+    <string name="channel_add_placeholder">@username или t.me/…</string>
+    <string name="channel_add">Добавить</string>
+    <string name="channel_adding">Добавление…</string>
+    <string name="channel_invalid_input">Введите @username или ссылку t.me / tg://</string>
+    <string name="channel_subscribe">Подписаться</string>
+    <string name="channel_subscribing">Подписка…</string>
+    <string name="channel_subscribe_failed">Не удалось подписаться на канал</string>
+    <string name="channel_info">Информация о канале</string>
+    <string name="channel_menu">Меню канала</string>
+    <string name="channel_back_to_chats">Назад к списку чатов</string>
+    <string name="channel_copy_link">Копировать ссылку</string>
+    <string name="channel_link_copied">Ссылка скопирована</string>
+    <string name="channel_leave">Покинуть канал</string>
+    <string name="channel_leave_title">Покинуть канал?</string>
+    <string name="channel_leave_confirm">Вы уверены, что хотите покинуть канал %1$s?</string>
+    <string name="channel_leaving">Выход…</string>
+    <string name="channel_leave_action">Покинуть</string>
+    <string name="channel_not_found_title">Канал не найден</string>
+    <string name="channel_not_found_body">Канал @%1$s не существует, приватный или preview отключён.</string>
+    <string name="channel_no_description">Описание отсутствует</string>
+    <string name="channel_counters_subscribers">Подписчики</string>
+    <string name="channel_counters_photos">Фото</string>
+    <string name="channel_counters_videos">Видео</string>
+    <string name="channel_counters_files">Файлы</string>
+    <string name="channel_counters_links">Ссылки</string>
+
+    <string name="preview_photo">Фото</string>
+    <string name="preview_photos">%1$d фото</string>
+    <string name="preview_video">Видео</string>
+    <string name="preview_sticker">Стикер</string>
+    <string name="preview_file">Файл</string>
+    <string name="preview_location">Геолокация</string>
+    <string name="preview_unsupported">Данный тип постов пока не поддерживается.</string>
+
+    <string name="post_forwarded_from">Переслано из %1$s</string>
+    <string name="post_open_photo">Открыть фото</string>
+    <string name="post_play">Воспроизвести</string>
+    <string name="post_document_note">Увы, Telegram Reader не сможет скачать этот файл.</string>
+    <string name="post_location">Геолокация</string>
+    <string name="post_open_map">Открыть на карте</string>
+    <string name="post_share">Поделиться</string>
+    <string name="post_scroll_down">Прокрутить вниз</string>
+    <string name="post_yesterday">вчера</string>
+    <string name="post_subscriber_one">подписчик</string>
+    <string name="post_subscriber_few">подписчика</string>
+    <string name="post_subscriber_many">подписчиков</string>
+    <string name="post_view_one">просмотр</string>
+    <string name="post_view_few">просмотра</string>
+    <string name="post_view_many">просмотров</string>
+
+    <string name="player_play">Воспроизвести</string>
+    <string name="player_pause">Пауза</string>
+    <string name="player_progress">Прогресс воспроизведения</string>
+    <string name="player_mute">Выключить звук</string>
+    <string name="player_unmute">Включить звук</string>
+
+    <string name="media_photo_load_failed">Не удалось загрузить фото</string>
+    <string name="media_video_load_failed">Не удалось загрузить видео</string>
+    <string name="media_sticker_load_failed">Не удалось загрузить стикер</string>
+    <string name="media_videosticker_load_failed">Не удалось загрузить видеостикер</string>
+    <string name="media_document_load_failed">Не удалось загрузить файл</string>
+    <string name="media_location_load_failed">Не удалось загрузить геолокацию</string>
+    <string name="media_unsupported_post_type">Данный тип постов пока не поддерживается</string>
+    <string name="media_unavailable">Медиа недоступно</string>
+    <string name="media_not_supported_browser">Это медиа не поддерживается</string>
+    <string name="media_open_in_telegram">Увы, Telegram Reader не сможет отобразить этот пост, пожалуйста, откройте его в Telegram.</string>
+    <string name="media_too_big">Увы, Telegram Reader не сможет отобразить этот медиафайл, потому что он слишком большой.</string>
+    <string name="media_channel_created">Канал создан.</string>
+
+    <string name="error_account_load_failed">Не удалось загрузить аккаунт</string>
+    <string name="error_bad_request">Некорректный запрос</string>
+    <string name="error_enter_account_id">Введите ID аккаунта</string>
+    <string name="error_account_not_found">Аккаунт не найден</string>
+    <string name="error_account_not_found_refresh">Аккаунт не найден. Обновите страницу.</string>
+    <string name="error_account_create_failed">Не удалось создать аккаунт. Попробуйте ещё раз.</string>
+    <string name="error_rate_limited">Слишком много запросов. Попробуйте позже.</string>
+    <string name="error_service_unavailable">Сервис временно недоступен. Попробуйте позже.</string>
+</resources>

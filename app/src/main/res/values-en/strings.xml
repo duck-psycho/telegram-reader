@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Telegram Reader</string>
+    <string name="common_back">Back</string>
+    <string name="common_close">Close</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_copied">Copied</string>
+    <string name="common_network_error">Network error</string>
+    <string name="common_search">Search</string>
+    <string name="common_version">Version %1$s</string>
+    <string name="update_available">New version available: %1$s</string>
+
+    <string name="nav_login">Sign in</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_add_channel">Add channel</string>
+
+    <string name="welcome_sidebar_guest">Tap + to add a public Telegram channel and start reading.</string>
+    <string name="welcome_support_prefix">If you’d like to</string>
+    <string name="welcome_support_project">support the project</string>
+    <string name="welcome_support_middle">, you’ll find options in</string>
+    <string name="welcome_support_settings">settings</string>
+    <string name="welcome_support_suffix">.</string>
+
+    <string name="empty_intro">A web reader for public Telegram channels with a familiar interface. Subscribe to channels, read the feed without the Telegram app, and sync subscriptions across devices with your account ID.</string>
+    <string name="empty_intro_how_to">To get started, add a channel with + or sign in to an existing account in the header.</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_account">Account</string>
+    <string name="settings_subscriptions">Subscriptions</string>
+    <string name="settings_created">Created</string>
+    <string name="settings_account_empty">An account will be created after your first channel subscription.</string>
+    <string name="settings_show_id">Show ID</string>
+    <string name="settings_hide_id">Hide ID</string>
+    <string name="settings_id_info_label">About account ID</string>
+    <string name="settings_id_info">Account ID syncs your subscriptions across devices. Save it to sign in elsewhere or restore access later. Keep it private — anyone with the ID can access your subscriptions.</string>
+    <string name="settings_copy_id">Copy ID</string>
+    <string name="settings_id_copied">ID copied</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_locale_ru">Русский</string>
+    <string name="settings_locale_en">English</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_developer">Developer</string>
+    <string name="settings_site">Website</string>
+    <string name="settings_support">Support the developer</string>
+    <string name="settings_support_intro">If you find the app useful, you can support the developer with a Boosty subscription or donation, or send crypto:</string>
+    <string name="settings_boosty_donate">Boosty (donate)</string>
+    <string name="settings_copy">Copy</string>
+    <string name="settings_logout">Sign out</string>
+    <string name="settings_logging_out">Signing out…</string>
+    <string name="settings_cache">Media cache</string>
+    <string name="settings_cache_usage">%1$d files · %2$s / %3$s</string>
+    <string name="settings_cache_clear">Clear cache</string>
+    <string name="settings_cache_clearing">Clearing…</string>
+
+    <string name="login_title">Sign in</string>
+    <string name="login_account">Account</string>
+    <string name="login_hint">Enter your account ID to restore subscriptions on this device.</string>
+    <string name="login_placeholder">Account ID</string>
+    <string name="login_submit">Sign in</string>
+    <string name="login_submitting">Signing in…</string>
+    <string name="login_enter_id">Enter account ID</string>
+    <string name="login_failed">Could not sign in</string>
+
+    <string name="channel_add_title">Add channel</string>
+    <string name="channel_add_placeholder">@username or t.me/…</string>
+    <string name="channel_add">Add</string>
+    <string name="channel_adding">Adding…</string>
+    <string name="channel_invalid_input">Enter @username or a t.me / tg:// link</string>
+    <string name="channel_subscribe">Subscribe</string>
+    <string name="channel_subscribing">Subscribing…</string>
+    <string name="channel_subscribe_failed">Could not subscribe to the channel</string>
+    <string name="channel_info">Channel info</string>
+    <string name="channel_menu">Channel menu</string>
+    <string name="channel_back_to_chats">Back to chat list</string>
+    <string name="channel_copy_link">Copy link</string>
+    <string name="channel_link_copied">Link copied</string>
+    <string name="channel_leave">Leave channel</string>
+    <string name="channel_leave_title">Leave channel?</string>
+    <string name="channel_leave_confirm">Are you sure you want to leave %1$s?</string>
+    <string name="channel_leaving">Leaving…</string>
+    <string name="channel_leave_action">Leave</string>
+    <string name="channel_not_found_title">Channel not found</string>
+    <string name="channel_not_found_body">Channel @%1$s does not exist, is private, or preview is disabled.</string>
+    <string name="channel_no_description">No description</string>
+    <string name="channel_counters_subscribers">Subscribers</string>
+    <string name="channel_counters_photos">Photos</string>
+    <string name="channel_counters_videos">Videos</string>
+    <string name="channel_counters_files">Files</string>
+    <string name="channel_counters_links">Links</string>
+
+    <string name="preview_photo">Photo</string>
+    <string name="preview_photos">%1$d photos</string>
+    <string name="preview_video">Video</string>
+    <string name="preview_sticker">Sticker</string>
+    <string name="preview_file">File</string>
+    <string name="preview_location">Location</string>
+    <string name="preview_unsupported">This post type is not supported yet.</string>
+
+    <string name="post_forwarded_from">Forwarded from %1$s</string>
+    <string name="post_open_photo">Open photo</string>
+    <string name="post_play">Play</string>
+    <string name="post_document_note">Sorry, Telegram Reader can’t download this file.</string>
+    <string name="post_location">Location</string>
+    <string name="post_open_map">Open on map</string>
+    <string name="post_share">Share</string>
+    <string name="post_scroll_down">Scroll down</string>
+    <string name="post_yesterday">yesterday</string>
+    <string name="post_subscriber_one">subscriber</string>
+    <string name="post_subscriber_few">subscribers</string>
+    <string name="post_subscriber_many">subscribers</string>
+    <string name="post_view_one">view</string>
+    <string name="post_view_few">views</string>
+    <string name="post_view_many">views</string>
+
+    <string name="player_play">Play</string>
+    <string name="player_pause">Pause</string>
+    <string name="player_progress">Playback progress</string>
+    <string name="player_mute">Mute</string>
+    <string name="player_unmute">Unmute</string>
+
+    <string name="media_photo_load_failed">Failed to load photo</string>
+    <string name="media_video_load_failed">Failed to load video</string>
+    <string name="media_sticker_load_failed">Failed to load sticker</string>
+    <string name="media_videosticker_load_failed">Failed to load video sticker</string>
+    <string name="media_document_load_failed">Failed to load file</string>
+    <string name="media_location_load_failed">Failed to load location</string>
+    <string name="media_unsupported_post_type">This post type is not supported yet</string>
+    <string name="media_unavailable">Media unavailable</string>
+    <string name="media_not_supported_browser">This media is not supported</string>
+    <string name="media_open_in_telegram">Sorry, Telegram Reader can’t display this post. Please open it in Telegram.</string>
+    <string name="media_too_big">Sorry, Telegram Reader can’t display this media because it’s too large.</string>
+    <string name="media_channel_created">Channel created.</string>
+
+    <string name="error_account_load_failed">Failed to load account</string>
+    <string name="error_bad_request">Invalid request</string>
+    <string name="error_enter_account_id">Enter account ID</string>
+    <string name="error_account_not_found">Account not found</string>
+    <string name="error_account_not_found_refresh">Account not found. Refresh the page.</string>
+    <string name="error_account_create_failed">Could not create account. Please try again.</string>
+    <string name="error_rate_limited">Too many requests. Try again later.</string>
+    <string name="error_service_unavailable">Service temporarily unavailable. Try again later.</string>
+</resources>
