@@ -14,14 +14,14 @@
     <string name="nav_settings">Настройки</string>
     <string name="nav_add_channel">Добавить канал</string>
 
-    <string name="welcome_sidebar_guest">Нажмите +, чтобы добавить публичный Telegram-канал и начать чтение.</string>
+    <string name="welcome_sidebar_guest">Нажмите «+», чтобы добавить публичный Telegram-канал и начать чтение.</string>
     <string name="welcome_support_prefix">Если хотите</string>
     <string name="welcome_support_project">поддержать проект</string>
     <string name="welcome_support_middle">, способы сделать это есть в</string>
     <string name="welcome_support_settings">настройках</string>
     <string name="welcome_support_suffix">.</string>
 
-    <string name="empty_intro">Веб-читалка публичных Telegram-каналов в привычном интерфейсе. Подписывайтесь на каналы, читайте ленту без приложения Telegram и синхронизируйте подписки между устройствами через ID аккаунта.</string>
+    <string name="empty_intro">Читалка публичных Telegram-каналов в привычном интерфейсе. Подписывайтесь на каналы, читайте ленту без приложения Telegram и синхронизируйте подписки между устройствами через ID аккаунта.</string>
     <string name="empty_intro_how_to">Чтобы начать, добавьте канал кнопкой «+» или войдите в существующий аккаунт в шапке.</string>
 
     <string name="settings_title">Настройки</string>

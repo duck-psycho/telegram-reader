@@ -14,15 +14,15 @@
     <string name="nav_settings">Settings</string>
     <string name="nav_add_channel">Add channel</string>
 
-    <string name="welcome_sidebar_guest">Tap + to add a public Telegram channel and start reading.</string>
+    <string name="welcome_sidebar_guest">Tap «+» to add a public Telegram channel and start reading.</string>
     <string name="welcome_support_prefix">If you’d like to</string>
     <string name="welcome_support_project">support the project</string>
     <string name="welcome_support_middle">, you’ll find options in</string>
     <string name="welcome_support_settings">settings</string>
     <string name="welcome_support_suffix">.</string>
 
-    <string name="empty_intro">A web reader for public Telegram channels with a familiar interface. Subscribe to channels, read the feed without the Telegram app, and sync subscriptions across devices with your account ID.</string>
-    <string name="empty_intro_how_to">To get started, add a channel with + or sign in to an existing account in the header.</string>
+    <string name="empty_intro">A reader for public Telegram channels with a familiar interface. Subscribe to channels, read the feed without the Telegram app, and sync subscriptions across devices with your account ID.</string>
+    <string name="empty_intro_how_to">To get started, add a channel with «+» or sign in to an existing account in the header.</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_account">Account</string>
