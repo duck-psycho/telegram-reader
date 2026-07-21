@@ -133,7 +133,6 @@ fun SettingsScreen(
                         account = account,
                         subscriptionCount = subscriptionCount,
                         locale = locale,
-                        loading = loading,
                         showId = showId,
                         showIdInfo = showIdInfo,
                         idCopied = idCopied,
@@ -148,7 +147,6 @@ fun SettingsScreen(
                                 idCopied = false
                             }
                         },
-                        onLogout = onLogout,
                     )
                 }
                 Spacer(Modifier.height(8.dp))
@@ -162,6 +160,19 @@ fun SettingsScreen(
                     value = "reader.duckpsycho.dev",
                     onOpen = { openUrl(context, "https://reader.duckpsycho.dev/", withAppReferrer = true) },
                 )
+                if (account != null) {
+                    Spacer(Modifier.height(8.dp))
+                    SecondaryButton(
+                        text = if (loading) {
+                            stringResource(R.string.settings_logging_out)
+                        } else {
+                            stringResource(R.string.settings_logout)
+                        },
+                        onClick = onLogout,
+                        modifier = Modifier.fillMaxWidth(),
+                        textColor = colors.error,
+                    )
+                }
             }
 
             SettingsSection(title = stringResource(R.string.settings_cache)) {
@@ -300,14 +311,12 @@ private fun AccountSection(
     account: Account,
     subscriptionCount: Int,
     locale: AppLocale,
-    loading: Boolean,
     showId: Boolean,
     showIdInfo: Boolean,
     idCopied: Boolean,
     onToggleShowId: () -> Unit,
     onToggleShowIdInfo: () -> Unit,
     onCopyId: () -> Unit,
-    onLogout: () -> Unit,
 ) {
     val colors = ReaderTheme.colors
     val accountIdStyle = TextStyle(
@@ -380,16 +389,5 @@ private fun AccountSection(
         color = colors.textMuted,
         fontSize = 15.sp,
         lineHeight = 18.sp,
-    )
-    Spacer(Modifier.height(8.dp))
-    SecondaryButton(
-        text = if (loading) {
-            stringResource(R.string.settings_logging_out)
-        } else {
-            stringResource(R.string.settings_logout)
-        },
-        onClick = onLogout,
-        modifier = Modifier.fillMaxWidth(),
-        textColor = colors.error,
     )
 }
