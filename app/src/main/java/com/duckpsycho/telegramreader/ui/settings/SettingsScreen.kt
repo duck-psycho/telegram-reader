@@ -151,6 +151,17 @@ fun SettingsScreen(
                         onLogout = onLogout,
                     )
                 }
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    stringResource(R.string.settings_web_version_hint),
+                    color = colors.textMuted,
+                    fontSize = 14.sp,
+                )
+                LinkRow(
+                    label = stringResource(R.string.settings_web_version),
+                    value = "reader.duckpsycho.dev",
+                    onOpen = { openUrl(context, "https://reader.duckpsycho.dev/", withAppReferrer = true) },
+                )
             }
 
             SettingsSection(title = stringResource(R.string.settings_cache)) {

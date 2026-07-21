@@ -29,6 +29,8 @@
     <string name="settings_subscriptions">Subscriptions</string>
     <string name="settings_created">Created</string>
     <string name="settings_account_empty">An account will be created after your first channel subscription.</string>
+    <string name="settings_web_version">Web version</string>
+    <string name="settings_web_version_hint">The same reader in your browser — subscriptions sync via your account ID.</string>
     <string name="settings_show_id">Show ID</string>
     <string name="settings_hide_id">Hide ID</string>
     <string name="settings_id_info_label">About account ID</string>

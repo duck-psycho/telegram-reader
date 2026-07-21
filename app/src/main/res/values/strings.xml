@@ -29,6 +29,8 @@
     <string name="settings_subscriptions">Подписки</string>
     <string name="settings_created">Создан</string>
     <string name="settings_account_empty">Аккаунт будет создан после первой подписки на канал.</string>
+    <string name="settings_web_version">Веб-версия</string>
+    <string name="settings_web_version_hint">Тот же ридер в браузере — подписки синхронизируются через ID аккаунта.</string>
     <string name="settings_show_id">Показать ID</string>
     <string name="settings_hide_id">Скрыть ID</string>
     <string name="settings_id_info_label">Что такое ID аккаунта</string>
