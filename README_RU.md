@@ -6,6 +6,8 @@ Android-приложение для чтения публичных Telegram-к�
 
 Веб-версия: [reader.duckpsycho.dev](https://reader.duckpsycho.dev/)
 
+Последнюю версию можно загрузить в разделе "[Releases](https://github.com/duck-psycho/telegram-reader/releases)".
+
 ## Возможности
 
 - Подписка на публичные каналы по `@username` или ссылке `t.me/…`.

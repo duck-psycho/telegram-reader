@@ -6,6 +6,8 @@ Android app for reading public Telegram channels in a familiar interface. Subscr
 
 Web version: [reader.duckpsycho.dev](https://reader.duckpsycho.dev/)
 
+You can download the latest version of the application in the "[Releases](https://github.com/duck-psycho/telegram-reader/releases)" section.
+
 ## Features
 
 - Subscribe to public channels via `@username` or a `t.me/…` link.
