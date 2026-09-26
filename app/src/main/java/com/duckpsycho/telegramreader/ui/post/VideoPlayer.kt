@@ -1,10 +1,8 @@
 package com.duckpsycho.telegramreader.ui.post
 
-import android.media.MediaPlayer
-import android.net.Uri
+import android.view.TextureView
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.VideoView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
@@ -57,11 +55,18 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.datasource.okhttp.OkHttpDataSource
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import com.duckpsycho.telegramreader.R
 import com.duckpsycho.telegramreader.TelegramReaderApp
 import com.duckpsycho.telegramreader.ui.theme.ReaderTheme
 import kotlinx.coroutines.delay
 
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 @Composable
 internal fun VideoPlayer(
     url: String,
@@ -90,16 +95,21 @@ internal fun VideoPlayer(
     var controlsVisible by remember(url) { mutableStateOf(controlsAlwaysVisible) }
     var isSeeking by remember(url) { mutableStateOf(false) }
     var seekPositionMs by remember(url) { mutableLongStateOf(0L) }
-    var videoView by remember(url) { mutableStateOf<VideoView?>(null) }
-    var mediaPlayer by remember(url) { mutableStateOf<MediaPlayer?>(null) }
+    val player = remember(url) {
+        val app = context.applicationContext as TelegramReaderApp
+        val source = OkHttpDataSource.Factory(app.httpClient).setDefaultRequestProperties(headers)
+        ExoPlayer.Builder(context).setMediaSourceFactory(ProgressiveMediaSource.Factory(source)).build().apply {
+            setMediaItem(MediaItem.fromUri(url))
+        }
+    }
+    var textureView by remember(url) { mutableStateOf<TextureView?>(null) }
 
     fun togglePlay() {
-        val view = videoView ?: return
-        if (view.isPlaying) {
-            view.pause()
+        if (player.isPlaying) {
+            player.pause()
             playing = false
         } else {
-            view.start()
+            player.play()
             playing = true
             started = true
         }
@@ -117,15 +127,14 @@ internal fun VideoPlayer(
     }
 
     fun toggleMute() {
-        val player = mediaPlayer ?: return
         muted = !muted
-        val volume = if (muted) 0f else 1f
-        player.setVolume(volume, volume)
+        player.volume = if (muted) 0f else 1f
     }
 
-    LaunchedEffect(playing, videoView, isSeeking) {
-        while (playing && videoView != null && !isSeeking) {
-            currentTimeMs = videoView?.currentPosition?.toLong() ?: 0L
+    LaunchedEffect(playing, isSeeking) {
+        while (playing && !isSeeking) {
+            currentTimeMs = player.currentPosition
+            buffered = player.bufferedPercentage / 100f
             delay(250)
         }
     }
@@ -137,22 +146,38 @@ internal fun VideoPlayer(
         }
     }
 
-    DisposableEffect(url) {
+    DisposableEffect(player) {
+        val listener = object : Player.Listener {
+            override fun onPlaybackStateChanged(state: Int) {
+                if (state == Player.STATE_READY) {
+                    ready = true
+                    durationMs = player.duration.coerceAtLeast(0L)
+                }
+                if (state == Player.STATE_ENDED) {
+                    playing = false
+                    currentTimeMs = durationMs
+                }
+            }
+            override fun onPlayerError(error: PlaybackException) {
+                loadFailed = true
+            }
+        }
+        player.addListener(listener)
+        player.prepare()
         onDispose {
-            videoView?.pause()
-            videoView?.stopPlayback()
+            player.removeListener(listener)
+            player.release()
         }
     }
 
-    LaunchedEffect(autoStart, ready, videoView) {
-        val view = videoView ?: return@LaunchedEffect
+    LaunchedEffect(autoStart, ready) {
         if (!ready) return@LaunchedEffect
         if (autoStart) {
-            view.start()
+            player.play()
             started = true
             playing = true
         } else {
-            view.pause()
+            player.pause()
             playing = false
         }
     }
@@ -171,45 +196,24 @@ internal fun VideoPlayer(
         key(url) {
             AndroidView(
                 factory = { ctx ->
-                    VideoView(ctx).apply {
+                    TextureView(ctx).apply {
                         if (fullscreen) {
                             isClickable = false
                             isFocusable = false
                             setOnTouchListener { _, _ -> false }
                         }
-                        setVideoURI(Uri.parse(url), headers)
-                        setOnPreparedListener { player ->
-                            mediaPlayer = player
-                            durationMs = player.duration.toLong().coerceAtLeast(0L)
-                            player.setOnBufferingUpdateListener { _, percent ->
-                                buffered = percent / 100f
-                            }
-                            ready = true
-                            if (autoStart) {
-                                start()
-                                started = true
-                                playing = true
-                            }
-                        }
-                        setOnErrorListener { _, _, _ ->
-                            loadFailed = true
-                            true
-                        }
-                        setOnCompletionListener {
-                            playing = false
-                            currentTimeMs = durationMs
-                        }
+                        player.setVideoTextureView(this)
                         layoutParams = FrameLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT,
                         )
-                        videoView = this
+                        textureView = this
                     }
                 },
                 modifier = Modifier.fillMaxSize(),
                 update = { view ->
-                    if (view !== videoView) {
-                        videoView = view
+                    if (view !== textureView) {
+                        textureView = view
                     }
                 },
             )
@@ -222,7 +226,7 @@ internal fun VideoPlayer(
             )
         }
 
-        // Transparent overlay so Compose gets taps/swipes instead of VideoView.
+        // Transparent overlay so Compose gets taps/swipes instead of the texture view.
         if (handleContentGestures && (fullscreen || started)) {
             val swipeDismiss = LocalLightboxSwipeDismiss.current
             Box(
@@ -277,7 +281,7 @@ internal fun VideoPlayer(
                     seekPositionMs = value
                 },
                 onSeekFinished = {
-                    videoView?.seekTo(seekPositionMs.toInt())
+                    player.seekTo(seekPositionMs)
                     currentTimeMs = seekPositionMs
                     isSeeking = false
                     controlsVisible = true

@@ -126,10 +126,13 @@ fun ReaderApp(
                             subscriptionCount = state.subscriptions.size,
                             theme = state.theme,
                             locale = state.locale,
+                            proxy = state.proxy,
                             loading = state.actionLoading,
                             onBack = viewModel::closeOverlay,
                             onThemeChange = viewModel::setTheme,
                             onLocaleChange = viewModel::setLocale,
+                            onProxySave = viewModel::saveProxy,
+                            onProxyDelete = viewModel::deleteProxy,
                             onLogout = viewModel::logout,
                             onCopied = viewModel::showSnackbar,
                         )

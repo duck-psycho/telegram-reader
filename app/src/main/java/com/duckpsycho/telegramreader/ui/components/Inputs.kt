@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -50,6 +51,7 @@ fun ReaderTextField(
     fontSize: TextUnit = 16.sp,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
 ) {
     val colors = ReaderTheme.colors
     val textStyle = readerInputTextStyle(colors.textStrong, fontSize)
@@ -63,6 +65,7 @@ fun ReaderTextField(
         cursorBrush = SolidColor(colors.textStrong),
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
+        visualTransformation = visualTransformation,
         decorationBox = { inner ->
             Box(
                 modifier = Modifier.fillMaxWidth(),

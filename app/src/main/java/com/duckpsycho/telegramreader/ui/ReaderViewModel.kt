@@ -8,6 +8,7 @@ import com.duckpsycho.telegramreader.TelegramReaderApp
 import com.duckpsycho.telegramreader.data.ApiException
 import com.duckpsycho.telegramreader.data.AppLocale
 import com.duckpsycho.telegramreader.data.Channel
+import com.duckpsycho.telegramreader.data.ProxySettings
 import com.duckpsycho.telegramreader.data.SubscriptionItem
 import com.duckpsycho.telegramreader.data.mergeChannel
 import com.duckpsycho.telegramreader.data.resolveApiError
@@ -35,6 +36,7 @@ class ReaderViewModel(application: Application) : AndroidViewModel(application) 
         ReaderUiState(
             theme = prefs.theme,
             locale = prefs.locale,
+            proxy = app.proxyStore.load(),
             hasAccount = cookieJar.hasAccountCookie(),
             subscriptions = if (cookieJar.hasAccountCookie()) prefs.loadCachedSubscriptions() else emptyList(),
         ),
@@ -105,6 +107,33 @@ class ReaderViewModel(application: Application) : AndroidViewModel(application) 
     fun setLocale(locale: AppLocale) {
         prefs.locale = locale
         _state.update { it.copy(locale = locale, recreateForLocale = true) }
+    }
+
+    fun saveProxy(settings: ProxySettings) {
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    app.proxyStore.save(settings)
+                    app.proxyRouting.update(settings, app.httpClient)
+                }
+            } catch (_: Exception) {
+                _state.update { it.copy(snackbar = app.getString(com.duckpsycho.telegramreader.R.string.proxy_save_failure)) }
+                return@launch
+            }
+            _state.update { it.copy(proxy = settings) }
+            bootstrap()
+        }
+    }
+
+    fun deleteProxy() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                app.proxyStore.clear()
+                app.proxyRouting.update(null, app.httpClient)
+            }
+            _state.update { it.copy(proxy = null) }
+            bootstrap()
+        }
     }
 
     fun consumeRecreate() {

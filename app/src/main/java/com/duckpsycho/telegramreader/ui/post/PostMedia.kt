@@ -1,9 +1,5 @@
 package com.duckpsycho.telegramreader.ui.post
 
-import android.graphics.SurfaceTexture
-import android.media.MediaPlayer
-import android.net.Uri
-import android.view.Surface
 import android.view.TextureView
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -44,6 +40,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
+import androidx.media3.common.Player
+import androidx.media3.datasource.okhttp.OkHttpDataSource
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.request.ImageRequest
@@ -204,6 +206,7 @@ internal fun ReservedMediaImage(
 }
 
 /** Inline muted looping video (GIF / videosticker). Uses TextureView so LazyColumn scrolls smoothly. */
+@androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 @Composable
 internal fun InlineLoopVideo(
     url: String,
@@ -226,20 +229,43 @@ internal fun InlineLoopVideo(
     var aspectRatio by remember(url) {
         mutableFloatStateOf(fixedAspectRatio ?: 1f)
     }
-    var playerRef by remember(url) { mutableStateOf<MediaPlayer?>(null) }
+    val player = remember(url) {
+        val app = context.applicationContext as TelegramReaderApp
+        val source = OkHttpDataSource.Factory(app.httpClient).setDefaultRequestProperties(headers)
+        ExoPlayer.Builder(context).setMediaSourceFactory(ProgressiveMediaSource.Factory(source)).build().apply {
+            setMediaItem(MediaItem.fromUri(url))
+            repeatMode = if (loop) Player.REPEAT_MODE_ONE else Player.REPEAT_MODE_OFF
+            volume = if (muted) 0f else 1f
+        }
+    }
 
     fun updateAspectRatio(width: Int, height: Int) {
         if (fixedAspectRatio != null || width <= 0 || height <= 0) return
         aspectRatio = (width.toFloat() / height.toFloat()).coerceIn(0.4f, 2.5f)
     }
 
-    DisposableEffect(url) {
-        onDispose {
-            runCatching {
-                playerRef?.setSurface(null)
-                playerRef?.release()
+    DisposableEffect(player) {
+        val listener = object : Player.Listener {
+            override fun onPlaybackStateChanged(state: Int) {
+                if (state == Player.STATE_READY) {
+                    val size = player.videoSize
+                    updateAspectRatio(size.width, size.height)
+                    ready = true
+                    if (autoplay) player.play()
+                }
             }
-            playerRef = null
+            override fun onPlayerError(error: PlaybackException) {
+                failed = true
+            }
+            override fun onVideoSizeChanged(videoSize: androidx.media3.common.VideoSize) {
+                updateAspectRatio(videoSize.width, videoSize.height)
+            }
+        }
+        player.addListener(listener)
+        player.prepare()
+        onDispose {
+            player.removeListener(listener)
+            player.release()
             ready = false
             frameReady = false
         }
@@ -280,58 +306,7 @@ internal fun InlineLoopVideo(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT,
                         )
-                        surfaceTextureListener = object : TextureView.SurfaceTextureListener {
-                            override fun onSurfaceTextureAvailable(
-                                surface: SurfaceTexture,
-                                width: Int,
-                                height: Int,
-                            ) {
-                                val player = MediaPlayer()
-                                playerRef = player
-                                try {
-                                    player.setDataSource(ctx, Uri.parse(url), headers)
-                                    player.setSurface(Surface(surface))
-                                    player.isLooping = loop
-                                    val volume = if (muted) 0f else 1f
-                                    player.setVolume(volume, volume)
-                                    player.setOnVideoSizeChangedListener { _, vw, vh ->
-                                        updateAspectRatio(vw, vh)
-                                    }
-                                    player.setOnPreparedListener {
-                                        updateAspectRatio(player.videoWidth, player.videoHeight)
-                                        ready = true
-                                        if (autoplay) player.start()
-                                    }
-                                    player.setOnErrorListener { _, _, _ ->
-                                        failed = true
-                                        true
-                                    }
-                                    player.prepareAsync()
-                                } catch (_: Exception) {
-                                    failed = true
-                                    runCatching { player.release() }
-                                    playerRef = null
-                                }
-                            }
-
-                            override fun onSurfaceTextureSizeChanged(
-                                surface: SurfaceTexture,
-                                width: Int,
-                                height: Int,
-                            ) = Unit
-
-                            override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
-                                runCatching {
-                                    playerRef?.setSurface(null)
-                                    playerRef?.release()
-                                }
-                                playerRef = null
-                                ready = false
-                                return true
-                            }
-
-                            override fun onSurfaceTextureUpdated(surface: SurfaceTexture) = Unit
-                        }
+                        player.setVideoTextureView(this)
                     }
                 },
                 modifier = Modifier

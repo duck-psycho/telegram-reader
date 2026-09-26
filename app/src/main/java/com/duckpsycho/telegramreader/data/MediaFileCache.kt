@@ -41,7 +41,7 @@ class MediaFileCache(
         return file
     }
 
-    /** Cookie header so MediaPlayer can auth the same hosts as OkHttp. */
+    /** Cookie header for playback requests through the shared OkHttp client. */
     fun playbackHeaders(url: String): Map<String, String> {
         val httpUrl = url.toHttpUrlOrNull() ?: return emptyMap()
         val cookies = cookieJar.loadForRequest(httpUrl)

@@ -4,6 +4,7 @@ import com.duckpsycho.telegramreader.data.Account
 import com.duckpsycho.telegramreader.data.AppLocale
 import com.duckpsycho.telegramreader.data.Channel
 import com.duckpsycho.telegramreader.data.Post
+import com.duckpsycho.telegramreader.data.ProxySettings
 import com.duckpsycho.telegramreader.data.SubscriptionItem
 import com.duckpsycho.telegramreader.ui.theme.ThemePreference
 
@@ -40,6 +41,7 @@ data class ReaderUiState(
     val overlay: Overlay = Overlay.None,
     val theme: ThemePreference = ThemePreference.System,
     val locale: AppLocale = AppLocale.Ru,
+    val proxy: ProxySettings? = null,
     val snackbar: String? = null,
     val actionLoading: Boolean = false,
     val actionError: String? = null,

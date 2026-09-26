@@ -45,6 +45,7 @@ import com.duckpsycho.telegramreader.TelegramReaderApp
 import com.duckpsycho.telegramreader.data.Account
 import com.duckpsycho.telegramreader.data.AppLocale
 import com.duckpsycho.telegramreader.data.CacheStats
+import com.duckpsycho.telegramreader.data.ProxySettings
 import com.duckpsycho.telegramreader.ui.components.SecondaryButton
 import com.duckpsycho.telegramreader.ui.components.copyToClipboard
 import com.duckpsycho.telegramreader.ui.components.openUrl
@@ -64,10 +65,13 @@ fun SettingsScreen(
     subscriptionCount: Int,
     theme: ThemePreference,
     locale: AppLocale,
+    proxy: ProxySettings?,
     loading: Boolean,
     onBack: () -> Unit,
     onThemeChange: (ThemePreference) -> Unit,
     onLocaleChange: (AppLocale) -> Unit,
+    onProxySave: (ProxySettings) -> Unit,
+    onProxyDelete: () -> Unit,
     onLogout: () -> Unit,
     onCopied: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -191,6 +195,10 @@ fun SettingsScreen(
                         }
                     },
                 )
+            }
+
+            SettingsSection(title = stringResource(R.string.settings_proxy)) {
+                ProxySection(proxy, onProxySave, onProxyDelete)
             }
 
             SettingsSection(title = stringResource(R.string.settings_theme), compact = true) {

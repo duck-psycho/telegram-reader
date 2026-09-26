@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.okhttp)
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.datasource.okhttp)
     implementation(libs.coil.compose)
     implementation(libs.coil.gif)
     implementation(libs.coil.video)

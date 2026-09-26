@@ -12,6 +12,8 @@ import com.duckpsycho.telegramreader.data.CachedMediaInterceptor
 import com.duckpsycho.telegramreader.data.HttpClientFactory
 import com.duckpsycho.telegramreader.data.MediaFileCache
 import com.duckpsycho.telegramreader.data.PersistentCookieJar
+import com.duckpsycho.telegramreader.data.ProxyRouting
+import com.duckpsycho.telegramreader.data.ProxySettingsStore
 import com.duckpsycho.telegramreader.data.UserPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +32,10 @@ class TelegramReaderApp : Application() {
         private set
     lateinit var mediaCache: MediaFileCache
         private set
+    lateinit var proxyStore: ProxySettingsStore
+        private set
+    lateinit var proxyRouting: ProxyRouting
+        private set
 
     private val appScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -37,11 +43,14 @@ class TelegramReaderApp : Application() {
         super.onCreate()
         cookieJar = PersistentCookieJar(this)
         prefs = UserPreferences(this)
-        httpClient = HttpClientFactory.create(cookieJar)
+        proxyStore = ProxySettingsStore(this)
+        proxyRouting = ProxyRouting(proxyStore.load())
+        httpClient = HttpClientFactory.create(cookieJar, proxyRouting)
         api = ApiClient(httpClient, prefs)
         mediaCache = MediaFileCache(this, httpClient, cookieJar)
         Coil.setImageLoader(
             ImageLoader.Builder(this)
+                .okHttpClient(httpClient)
                 .components {
                     if (Build.VERSION.SDK_INT >= 28) {
                         add(ImageDecoderDecoder.Factory())
