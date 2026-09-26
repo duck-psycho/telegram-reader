@@ -15,6 +15,7 @@ You can download the latest version of the application in the "[Releases](https:
 - Sync subscriptions between Android and the web version with an account ID.
 - Dark theme.
 - Media cache (up to 512 MB) with manual clear.
+- A home screen widget with scrollable previews of recent posts from a selected subscribed channel. Add it through Android's widget picker; refresh is scheduled every 30 minutes. Tap ↻ to refresh immediately.
 
 ## Screenshots
 

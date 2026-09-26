@@ -200,7 +200,6 @@ internal fun VideoPlayer(
                         if (fullscreen) {
                             isClickable = false
                             isFocusable = false
-                            setOnTouchListener { _, _ -> false }
                         }
                         player.setVideoTextureView(this)
                         layoutParams = FrameLayout.LayoutParams(

@@ -15,6 +15,7 @@ import com.duckpsycho.telegramreader.data.resolveApiError
 import com.duckpsycho.telegramreader.ui.theme.ThemePreference
 import com.duckpsycho.telegramreader.util.parseChannelUsername
 import com.duckpsycho.telegramreader.util.parseReaderDeepLink
+import com.duckpsycho.telegramreader.widget.ChannelWidgetUpdater
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -63,7 +64,10 @@ class ReaderViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun applySubscriptions(subscriptions: List<SubscriptionItem>) {
+        val before = _state.value.subscriptions.map { it.channel.username.lowercase() }.toSet()
         _state.update { it.copy(subscriptions = subscriptions) }
+        val after = subscriptions.map { it.channel.username.lowercase() }.toSet()
+        if (before != after) ChannelWidgetUpdater.onSubscriptionsChanged(app, _state.value.account?.id, after)
     }
 
     /** Reloads account + subscriptions and writes them into UI state. */
@@ -406,9 +410,15 @@ class ReaderViewModel(application: Application) : AndroidViewModel(application) 
             return
         }
         runAuthAction(
-            request = { api.login(id) },
+            request = {
+                api.login(id)
+                ChannelWidgetUpdater.onAccountChanged(app, null)
+            },
             closeOverlay = true,
-            onSuccess = onSuccess,
+            onSuccess = {
+                ChannelWidgetUpdater.onAccountChanged(app, _state.value.account?.id)
+                onSuccess()
+            },
         )
     }
 
@@ -421,6 +431,7 @@ class ReaderViewModel(application: Application) : AndroidViewModel(application) 
             }
             cookieJar.clear()
             prefs.clearCachedSubscriptions()
+            ChannelWidgetUpdater.onAccountChanged(app, null)
             cancelFeedWork()
             stopSubscriptionsPolling()
             _state.update {
