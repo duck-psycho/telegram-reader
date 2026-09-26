@@ -117,7 +117,7 @@
     <string name="login_account">Аккаунт</string>
     <string
         name="login_hint"
-    >Введите ID аккаунта, чтобы восстановить подписки на этом устройстве.</string>
+    >Для входа нужен ID аккаунта Telegram Reader, а не ваш @username в Telegram. Если ID ещё нет, вернитесь и подпишитесь на канал — аккаунт создастся автоматически.</string>
     <string name="login_placeholder">ID аккаунта</string>
     <string name="login_submit">Войти</string>
     <string name="login_submitting">Вход…</string>

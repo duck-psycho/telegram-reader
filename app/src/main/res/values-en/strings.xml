@@ -115,7 +115,7 @@
     <string name="login_account">Account</string>
     <string
         name="login_hint"
-    >Enter your account ID to restore subscriptions on this device.</string>
+    >Sign in with your Telegram Reader account ID, not your Telegram @username. If you don’t have an ID yet, go back and subscribe to a channel to create an account automatically.</string>
     <string name="login_placeholder">Account ID</string>
     <string name="login_submit">Sign in</string>
     <string name="login_submitting">Signing in…</string>
